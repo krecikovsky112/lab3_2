@@ -42,7 +42,7 @@ class OrderTest {
     }
 
     @Test
-    public void testIfAfterTwoDaysConfirmStateIsCANCELLED() {
+    public void testForConfirmStateAfterTwoDaysIsCANCELLED(){
         order.addItem(new OrderItem());
         order.submit();
 
@@ -53,5 +53,15 @@ class OrderTest {
         }
 
         assertThat(Order.State.CANCELLED, is(order.getOrderState()));
+    }
+
+    @Test
+    public void testForStateAfterRealizeIsREALIZED() {
+        order.addItem(new OrderItem());
+        order.submit();
+        order.confirm(order.getSubbmitionDate().plusHours(1));
+        order.realize();
+
+        assertThat(Order.State.REALIZED, is(order.getOrderState()));
     }
 }

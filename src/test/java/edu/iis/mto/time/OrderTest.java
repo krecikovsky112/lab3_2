@@ -3,6 +3,7 @@ package edu.iis.mto.time;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -41,7 +42,7 @@ class OrderTest {
     }
 
     @Test
-    public void testForConfirmStateAfterTwoDaysIsCANCELLED(){
+    public void testForConfirmStateAfterTwoDaysIsCANCELLED() {
         order.addItem(new OrderItem());
         order.submit();
 
@@ -68,9 +69,21 @@ class OrderTest {
     public void testForThrowExceptionWithWrongOrder() {
         try {
             order.realize();
-        }catch (OrderStateException e)
-        {
+        } catch (OrderStateException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void testForThrowExceptionWithWrongDate() {
+        try {
+            order.addItem(new OrderItem());
+            order.submit();
+            order.confirm(order.getSubbmitionDate().plusHours(27));
+            order.realize();
+        } catch (OrderExpiredException e) {
+            e.printStackTrace();
+        }
+
     }
 }

@@ -3,7 +3,6 @@ package edu.iis.mto.time;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -63,5 +62,15 @@ class OrderTest {
         order.realize();
 
         assertThat(Order.State.REALIZED, is(order.getOrderState()));
+    }
+
+    @Test
+    public void testForThrowExceptionWithWrongOrder() {
+        try {
+            order.realize();
+        }catch (OrderStateException e)
+        {
+            e.printStackTrace();
+        }
     }
 }

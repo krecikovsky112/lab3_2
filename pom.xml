@@ -16,7 +16,7 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.1</version>
 		</dependency>
-	
+
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter</artifactId>
@@ -41,6 +41,22 @@
 			<version>2.2</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+		</dependency>
+		<dependency>
+			<groupId>io.circe</groupId>
+			<artifactId>not-java-time_sjs0.6_2.12</artifactId>
+			<version>0.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>systems.manifold</groupId>
+			<artifactId>manifold-collections</artifactId>
+			<version>0.7-alpha</version>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>

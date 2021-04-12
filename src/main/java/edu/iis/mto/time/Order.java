@@ -33,9 +33,9 @@ public class Order {
 
     }
 
-    public void confirm() {
+    public void confirm(LocalDateTime cancelTime) {
         requireState(State.SUBMITTED);
-        long hoursElapsedAfterSubmittion = subbmitionDate.until(LocalDateTime.now(), ChronoUnit.HOURS);
+        long hoursElapsedAfterSubmittion = subbmitionDate.until(cancelTime, ChronoUnit.HOURS);
         if (hoursElapsedAfterSubmittion > VALID_PERIOD_HOURS) {
             orderState = State.CANCELLED;
             throw new OrderExpiredException();
@@ -60,9 +60,9 @@ public class Order {
         }
 
         throw new OrderStateException("order should be in state "
-                                      + Arrays.toString(allowedStates)
-                                      + " to perform required  operation, but is in "
-                                      + orderState);
+                + Arrays.toString(allowedStates)
+                + " to perform required  operation, but is in "
+                + orderState);
 
     }
 

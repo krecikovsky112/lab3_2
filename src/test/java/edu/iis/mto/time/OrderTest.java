@@ -25,10 +25,33 @@ class OrderTest {
     }
 
     @Test
-    public void testForItemStateAfterAddAndSubmitIsSUBNITTED() {
+    public void testForItemStateAfterAddAndSubmitIsSUBMITTED() {
         order.addItem(new OrderItem());
         order.submit();
 
         assertThat(Order.State.SUBMITTED, is(order.getOrderState()));
+    }
+
+    @Test
+    public void testForConfirmStateAfterOneMinuteIsConfirmed() {
+        order.addItem(new OrderItem());
+        order.submit();
+        order.confirm(order.getSubbmitionDate().plusMinutes(1));
+
+        assertThat(Order.State.CONFIRMED, is(order.getOrderState()));
+    }
+
+    @Test
+    public void testIfAfterTwoDaysConfirmStateIsCANCELLED() {
+        order.addItem(new OrderItem());
+        order.submit();
+
+        try {
+            order.confirm(order.getSubbmitionDate().plusDays(2));
+        } catch (OrderExpiredException e) {
+            e.printStackTrace();
+        }
+
+        assertThat(Order.State.CANCELLED, is(order.getOrderState()));
     }
 }

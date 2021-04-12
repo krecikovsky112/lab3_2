@@ -52,6 +52,10 @@ public class Order {
         return orderState;
     }
 
+    LocalDateTime getSubbmitionDate() {
+        return subbmitionDate;
+    }
+
     private void requireState(State... allowedStates) {
         for (State allowedState : allowedStates) {
             if (orderState == allowedState) {

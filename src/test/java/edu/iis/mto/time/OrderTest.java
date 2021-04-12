@@ -24,4 +24,11 @@ class OrderTest {
         assertThat(Order.State.CREATED, is(order.getOrderState()));
     }
 
+    @Test
+    public void testForItemStateAfterAddAndSubmitIsSUBNITTED() {
+        order.addItem(new OrderItem());
+        order.submit();
+
+        assertThat(Order.State.SUBMITTED, is(order.getOrderState()));
+    }
 }
